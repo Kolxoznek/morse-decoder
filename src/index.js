@@ -37,9 +37,31 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
+
 function decode(expr) {
-    // write your solution here
+    let morseStr = toMorse(expr)
+
+    let decodedStr = ''
+
+    morseStr.forEach(char => {
+        decodedStr += MORSE_TABLE[char] || ' '
+    })
+
+    return decodedStr
 }
+
+function toMorse(expr) {
+    const morse = []
+    for (let i = 0; i < expr.length; i += 10) {
+        let char = expr.slice(i, i + 10)
+        char = char.replace(/00/g, '')
+        char = char.replace(/10/g, '.')
+        char = char.replace(/11/g, '-')
+        morse.push(char)
+    }
+    return morse
+}
+
 
 module.exports = {
     decode
